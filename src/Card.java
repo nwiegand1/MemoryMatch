@@ -3,7 +3,7 @@ import java.awt.Graphics;
 
 import javax.swing.JButton;
 
-public class Card extends JButton{
+public class Card {
 	
 	boolean flipped;
 	Color color;
@@ -13,13 +13,41 @@ public class Card extends JButton{
 	int width = 10;
 	int height = 10;
 	
-	public Card (Color color, boolean flipped, int xpos, int ypos, int val)
+	public Card (int val, boolean flipped, int xpos, int ypos)
 	{
+		this.flipped = flipped;
+		this.val = val;
 		this.xpos = xpos;
 		this.ypos = ypos;
-		this.flipped = flipped;
-		this.color = color;
-		this.val = val;
+		color = Color.RED;
+	/*	if (val == 1)
+		{
+			color = Color.RED;
+		}
+		if (val == 2)
+		{
+			color = Color.ORANGE;
+		}
+		if (val == 3)
+		{
+			color = Color.YELLOW;
+		}
+		if (val == 4)
+		{
+			color = Color.GREEN;
+		}
+		if (val == 5)
+		{
+			color = Color.BLUE;
+		}
+		if (val == 6)
+		{
+			color = Color.PINK;
+		}
+		if (val == 7)
+		{
+			color = Color.MAGENTA;
+		} */
 	}
 	
 	public void flip()
@@ -39,18 +67,23 @@ public class Card extends JButton{
 		return val;
 	}
 	
-	
+	public boolean isMatch (Card b)
+	{
+		return (this.val == b.getVal());
+	}
 	
 	public void draw(Graphics g) {
 		if (!flipped)
 		{
 			g.setColor(Color.BLACK);
 			g.fillRect(xpos, ypos, width, height);
+			System.out.println ("painted a face down card");
 		}
 		else
 		{
 			g.setColor(color);
 			g.fillRect(xpos, ypos, width, height);
+			System.out.println ("painted a face up card");
 		}
 	}
 
