@@ -10,8 +10,8 @@ public class Card {
 	public int val;
 	public int xpos;
 	public int ypos;
-	public int width = 10;
-	public int height = 10;
+	public int width = 30;
+	public int height = 30;
 	public boolean matched;
 	
 	public Card (int val, boolean flipped, int xpos, int ypos)
@@ -55,7 +55,8 @@ public class Card {
 		}
 		else if (val == 9)
 		{
-			color = Color.DARK_GRAY;
+			Color darkGrey = new Color (96, 96, 96);
+			color = darkGrey;
 		}
 		else if (val == 10)
 		{
@@ -67,28 +68,28 @@ public class Card {
 		}
 		else if (val == 12)
 		{
-			Color myNewBlue = new Color (100, 40, 200);
-			color = myNewBlue;
+			Color lightBlue = new Color (102, 178, 255);
+			color = lightBlue;
 		}
 		else if (val == 13)
 		{
-			Color myNewGreen = new Color (100, 200, 40);
-			color = myNewGreen;
+			Color lightgreenblue = new Color (102, 255, 178);
+			color = lightgreenblue;
 		}
 		else if (val == 14)
 		{
-			Color myNewRed = new Color (200, 40, 100);
-			color = myNewRed;
+			Color lavender = new Color (229, 204, 255);
+			color = lavender;
 		}
 		else if (val == 15)
 		{
-			Color myNewColor = new Color (10, 40, 90);
-			color = myNewColor;
+			Color purple = new Color (76, 0, 153);
+			color = purple;
 		}
 		else if (val == 16)
 		{
-			Color myNewColor = new Color (10, 240, 90);
-			color = myNewColor;
+			Color forestGreen = new Color (0, 102, 0);
+			color = forestGreen;
 		}
 		else if (val == 17)
 		{
@@ -97,8 +98,8 @@ public class Card {
 		}
 		else if (val == 18)
 		{
-			Color myNewColor = new Color (30, 30, 30);
-			color = myNewColor;
+			Color pinkpink = new Color (255, 51, 153);
+			color = pinkpink;
 		}
 		
 	}

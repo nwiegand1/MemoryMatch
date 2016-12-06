@@ -31,14 +31,14 @@ public Cards()
 		{
 			if (filled1)
 			{
-				cards [x][y] = new Card (i, false, x*10, y*10);
+				cards [x][y] = new Card (i, false, x*30, y*30);
 				filled[x][y] = true;
 				filled1 = false;
 				i++;
 			}
 			else 
 			{
-				cards [x][y] = new Card (i, false, x*10, y*10);
+				cards [x][y] = new Card (i, false, x*30, y*30);
 				filled[x][y] = true;
 				filled1 = true;
 			}		

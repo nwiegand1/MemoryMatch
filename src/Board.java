@@ -31,6 +31,7 @@ import javax.swing.Timer;
 		private Mode mode = Mode.FIRSTCARD;
 		private Card current;
 		private int matched = 0;
+		private int timeElapsed = 0;
 
 		// Game constants
 		public static final int BOARD_WIDTH = 300;
@@ -50,14 +51,14 @@ import javax.swing.Timer;
 			// each time the timer triggers. We define a helper method
 			// called tick() that actually does everything that should
 			// be done in a single timestep.
-		/*	Timer timer = new Timer(INTERVAL, new ActionListener() 
+			Timer timer = new Timer(INTERVAL, new ActionListener() 
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
 					tick();
 				}
 			});
-			timer.start(); // MAKE SURE TO START THE TIMER! */
+			timer.start(); // MAKE SURE TO START THE TIMER! 
 
 			// Enable keyboard focus on the court area.
 			// When this component has the keyboard focus, key
@@ -71,8 +72,8 @@ import javax.swing.Timer;
 				   {
 					   int xpos = e.getX();
 					   int ypos = e.getY();
-					   int cardColumn = xpos/10;
-					   int cardRow = ypos/10;
+					   int cardColumn = xpos/30;
+					   int cardRow = ypos/30;
 					   if (mode == Mode.FIRSTCARD)
 					   { 
 						   Card card1 = cards.getCard(cardColumn, cardRow);
@@ -145,15 +146,16 @@ import javax.swing.Timer;
 		void tick() {
 			if (playing) 
 			{
+				timeElapsed++;
 				// check for the game end conditions
 				if (matched == 18) 
 				{
 					playing = false;
-					status.setText("You win!");
+					status.setText("You win! It took "+ timeElapsed*35 + " seconds!");
 				}
 
 				// update the display
-				repaint();
+			//	repaint();
 			}
 		}
 
