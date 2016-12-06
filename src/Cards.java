@@ -23,10 +23,10 @@ public Cards()
 	}
 	boolean filled1 = false;
 	int i = 1;
-	while (i < 17)
+	while (i < 19)
 	{
-		int x = (int) (Math.random() * 5.0);
-		int y = (int) (Math.random() * 5.0);
+		int x = (int) Math.floor(Math.random() * 6);
+		int y = (int) Math.floor(Math.random() * 6);
 		if (!filled[x][y])
 		{
 			if (filled1)
@@ -42,6 +42,7 @@ public Cards()
 				filled[x][y] = true;
 				filled1 = true;
 			}		
+			System.out.println (cards[x][y] +" " +i);
 		}
 	}
 	

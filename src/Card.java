@@ -5,13 +5,14 @@ import javax.swing.JButton;
 
 public class Card {
 	
-	boolean flipped;
-	Color color;
-	int val;
+	private boolean flipped;
+	public Color color;
+	public int val;
 	public int xpos;
 	public int ypos;
-	int width = 10;
-	int height = 10;
+	public int width = 10;
+	public int height = 10;
+	public boolean matched;
 	
 	public Card (int val, boolean flipped, int xpos, int ypos)
 	{
@@ -19,35 +20,39 @@ public class Card {
 		this.val = val;
 		this.xpos = xpos;
 		this.ypos = ypos;
-		color = Color.RED;
-	/*	if (val == 1)
+		this.matched = false;
+		if (val == 1)
 		{
 			color = Color.RED;
 		}
-		if (val == 2)
+		else if (val == 2)
 		{
 			color = Color.ORANGE;
 		}
-		if (val == 3)
+		else if (val == 3)
 		{
 			color = Color.YELLOW;
 		}
-		if (val == 4)
+		else if (val == 4)
 		{
 			color = Color.GREEN;
 		}
-		if (val == 5)
+		else if (val == 5)
 		{
 			color = Color.BLUE;
 		}
-		if (val == 6)
+		else if (val == 6)
 		{
 			color = Color.PINK;
 		}
-		if (val == 7)
+		else if (val == 7)
 		{
 			color = Color.MAGENTA;
-		} */
+		}
+		else 
+		{
+			this.color = Color.RED;
+		}
 	}
 	
 	public void flip()
@@ -77,14 +82,19 @@ public class Card {
 		{
 			g.setColor(Color.BLACK);
 			g.fillRect(xpos, ypos, width, height);
-			System.out.println ("painted a face down card");
+			//System.out.println ("painted a face down card");
 		}
 		else
 		{
 			g.setColor(color);
 			g.fillRect(xpos, ypos, width, height);
-			System.out.println ("painted a face up card");
+			//System.out.println ("painted a face up card");
 		}
+	}
+	
+	public String toString ()
+	{
+		return ("value is " + val);
 	}
 
 }

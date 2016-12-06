@@ -7,6 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ import javax.swing.Timer;
 		// the state of the game logic
 		public boolean playing = false; // whether the game is running
 		private JLabel status; // Current status text (i.e. Running...)
+		
 		private Cards cards = new Cards();
 		private Mode mode = Mode.FIRSTCARD;
 		private Card current;
@@ -48,21 +50,21 @@ import javax.swing.Timer;
 			// each time the timer triggers. We define a helper method
 			// called tick() that actually does everything that should
 			// be done in a single timestep.
-			Timer timer = new Timer(INTERVAL, new ActionListener() 
+		/*	Timer timer = new Timer(INTERVAL, new ActionListener() 
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
 					tick();
 				}
 			});
-			timer.start(); // MAKE SURE TO START THE TIMER!
+			timer.start(); // MAKE SURE TO START THE TIMER! */
 
 			// Enable keyboard focus on the court area.
 			// When this component has the keyboard focus, key
 			// events will be handled by its key listener.
 			setFocusable(true);
 			
-/*
+
 			addMouseListener (new MouseAdapter()
 			{
 				   public void mousePressed(MouseEvent e) 
@@ -77,26 +79,39 @@ import javax.swing.Timer;
 						   current = card1;
 						   current.flip();
 						   repaint();
+						   mode = Mode.SECONDCARD;
 					   }
-					   if (mode == Mode.SECONDCARD)
+					   else //if (mode == Mode.SECONDCARD)
 					   {
 						   Card card2 = cards.getCard(cardColumn, cardRow);
-						   card2.flip();	
+						   card2.flip();
+						   System.out.println("Paint card 2");
 						   repaint();
+						   System.out.println("Finished painting card 2");
+						   try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} 
 						   if (current.isMatch(card2))
 						   {
 							   matched++;
+							   mode = Mode.FIRSTCARD;
+							   //need to make cards unable to be flipped again.
 						   }
 						   else 
 						   {
+							   
 							   current.flip();
 							   card2.flip();
 							   repaint();
+							   mode = Mode.FIRSTCARD;
 						   }	   
 					   }
 				   }
 				   }); 
-*/
+
 			
 			this.status = status;
 		}
