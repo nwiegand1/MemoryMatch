@@ -76,38 +76,47 @@ import javax.swing.Timer;
 					   if (mode == Mode.FIRSTCARD)
 					   { 
 						   Card card1 = cards.getCard(cardColumn, cardRow);
-						   current = card1;
-						   current.flip();
-						   repaint();
-						   mode = Mode.SECONDCARD;
+						   if (!card1.isMatched())
+						   {
+							   current = card1;
+							   current.flip();
+							   repaint();
+							   mode = Mode.SECONDCARD;
+						   }   
 					   }
 					   else //if (mode == Mode.SECONDCARD)
 					   {
 						   Card card2 = cards.getCard(cardColumn, cardRow);
-						   card2.flip();
-						   System.out.println("Paint card 2");
-						   repaint();
-						   System.out.println("Finished painting card 2");
-						   try {
-								Thread.sleep(1000);
-							} catch (InterruptedException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							} 
-						   if (current.isMatch(card2))
+						   if (!card2.isMatched())
 						   {
-							   matched++;
-							   mode = Mode.FIRSTCARD;
-							   //need to make cards unable to be flipped again.
-						   }
-						   else 
-						   {
-							   
-							   current.flip();
 							   card2.flip();
-							   repaint();
-							   mode = Mode.FIRSTCARD;
-						   }	   
+							   System.out.println("Paint card 2");
+							//   repaint();
+							   paintImmediately(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+							   System.out.println("Finished painting card 2");
+							   try {
+								   System.out.println ("about to wait");
+									Thread.sleep(1000);
+								   System.out.println ("done waiting");
+								} catch (InterruptedException e1) {
+									e1.printStackTrace();
+								} 
+							   if (current.isMatch(card2)) //if the 2 cards are a match
+							   {
+								   matched++;
+								   current.matched();
+								   card2.matched();
+								   mode = Mode.FIRSTCARD;
+								   //need to make cards unable to be flipped again.
+							   }
+							   else 
+							   { 
+								   current.flip();
+								   card2.flip();
+								   repaint();
+								   mode = Mode.FIRSTCARD;
+							   }
+						   }   	   
 					   }
 				   }
 				   }); 
@@ -137,7 +146,7 @@ import javax.swing.Timer;
 			if (playing) 
 			{
 				// check for the game end conditions
-				if (matched == 16) 
+				if (matched == 18) 
 				{
 					playing = false;
 					status.setText("You win!");
@@ -148,6 +157,14 @@ import javax.swing.Timer;
 			}
 		}
 
+		@Override
+		public void repaint ()
+		{
+			System.out.println("repainting");
+			super.repaint();
+		}
+		
+		
 		@Override
 		public void paintComponent(Graphics g) 
 		{
