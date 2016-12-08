@@ -51,13 +51,12 @@ PennKey: 55647612
   It was also difficult to figure out how to use I/O properly without getting too complicated
   
   
-
-
 - Evaluate your design. Is there a good separation of functionality? How well is
   private state encapsulated? What would you refactor, if given the chance?
   
-  I would refactor
-
+  I think there is a good speraration of functionality. I created different classes when needed.
+  Private state, as a result, is well encapsulated through setters and getters of each respective class.
+  I would refactor the mouse listener for the cards to be more streamlined.
 
 
 ========================
