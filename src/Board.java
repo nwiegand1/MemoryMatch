@@ -1,16 +1,21 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -32,6 +37,10 @@ import javax.swing.Timer;
 		private Card current;
 		private int matched = 0;
 		private int timeElapsed = 0;
+		private int flips = 0;
+		
+		//private List moves = new Pair LinkedList();
+		private HighscoreFunction highscore = new HighscoreFunction();
 
 		// Game constants
 		public static final int BOARD_WIDTH = 300;
@@ -42,6 +51,7 @@ import javax.swing.Timer;
 
 		public Board(JLabel status) 
 		{
+			
 			// creates border around the court area, JComponent method
 			setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -65,7 +75,6 @@ import javax.swing.Timer;
 			// events will be handled by its key listener.
 			setFocusable(true);
 			
-
 			addMouseListener (new MouseAdapter()
 			{
 				   public void mousePressed(MouseEvent e) 
@@ -81,6 +90,7 @@ import javax.swing.Timer;
 						   {
 							   current = card1;
 							   current.flip();
+							   flips++;
 							   repaint();
 							   mode = Mode.SECONDCARD;
 						   }   
@@ -91,6 +101,7 @@ import javax.swing.Timer;
 						   if (!card2.isMatched())
 						   {
 							   card2.flip();
+							   flips++;
 							   System.out.println("Paint card 2");
 							//   repaint();
 							   paintImmediately(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
@@ -138,6 +149,16 @@ import javax.swing.Timer;
 			// Make sure that this component has the keyboard focus
 			requestFocusInWindow();
 		}	
+		
+		public void showInstructions()
+		{
+			JOptionPane.showMessageDialog(null, "Use the mouse to click squares. Match 2 colored Square to create pairs. Match them all to win!");
+		}
+		
+		public void showScores()
+		{
+			highscore.displayScores();
+		}
 
 		/**
 		 * This method is called every time the timer defined in the constructor
@@ -151,11 +172,22 @@ import javax.swing.Timer;
 				if (matched == 18) 
 				{
 					playing = false;
-					status.setText("You win! It took "+ timeElapsed*35 + " seconds!");
+					status.setText("You win! It took "+ timeElapsed*35 + " seconds and "+ flips + " flips!");
+					String name = JOptionPane.showInputDialog("Name:");
+					highscore.addScore(name, flips);
 				}
 
 				// update the display
 			//	repaint();
+			}
+		}
+		
+		//undo button
+		public void undo()
+		{
+			if (mode == Mode.SECONDCARD)
+			{
+				
 			}
 		}
 
@@ -166,6 +198,50 @@ import javax.swing.Timer;
 			super.repaint();
 		}
 		
+		
+/*		public void readScores()
+		{
+		try {
+	        BufferedReader reader = new BufferedReader(new FileReader(file));
+	        String line = reader.readLine();
+	        while (line != null)   // read score file line by line
+	        {
+	            try {
+	            	char[] arr = line.toCharArray();
+	        		String name = "";
+	        		String scoreStr = "";
+	        		int score;
+	        		int i = 0;
+	        		while (Character.isLetter(arr[i]))
+	        		{
+	        			name = name + arr[i];
+	        			i++;
+	        		}
+	        		while(Character.isDigit(arr[i]))
+	        		{
+	        			scoreStr = scoreStr + arr[i];
+	        			i++;
+	        		}
+	        		score = Integer.parseInt(scoreStr);
+	                if (score > highScore)                       // and keep track of the largest
+	                { 
+	                    highScore = score; 
+	                }
+	            } catch (NumberFormatException e1) {
+	                // ignore invalid scores
+	                //System.err.println("ignoring invalid score: " + line);
+	            }
+	            line = reader.readLine();
+	        }
+	        reader.close();
+
+	    } catch (IOException ex) {
+	        System.err.println("ERROR reading scores from file");
+	    }
+		}
+		
+		
+		*/
 		
 		@Override
 		public void paintComponent(Graphics g) 

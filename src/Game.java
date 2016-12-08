@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -51,6 +52,40 @@ public class Game implements Runnable {
 				}
 			});
 			control_panel.add(reset);
+			
+			//add undo button
+			final JButton undo = new JButton("Undo");
+			reset.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					board.undo();
+				}
+			});
+			control_panel.add(undo);
+			
+			//add instructions
+			final JButton inst = new JButton("Instructions");
+			inst.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					board.showInstructions();
+				}
+			});
+			control_panel.add(inst);
+			
+			//add highscores
+			final JButton scores = new JButton("Highscores");
+			scores.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					board.showScores();
+				}
+			});
+			control_panel.add(scores);
+			
 
 			// Put the frame on the screen
 			frame.pack();
@@ -59,6 +94,8 @@ public class Game implements Runnable {
 
 			// Start game
 			board.reset();
+			
+			
 	}
 
 	public static void main(String[] args) 

@@ -1,0 +1,75 @@
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+CIS 120 Game Project README
+PennKey: 55647612
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+===================
+=: Core Concepts :=
+===================
+
+- List the four core concepts, the features they implement, and why each feature
+  is an approprate use of the concept. Incorporate the feedback you got after
+  submitting your proposal.
+
+  1. 2D Arrays - the board is modeled by a 2D array of "card"s . this is an appropriate use of this concept because the cards form a grid, like a 2D array
+
+  2. I/O - the reading and writing of highscores into a textfile uses I/O. this is an appropriate use of I/O because the I/O is needed to catch exceptions and interact with files on the computer
+
+  3. Testing - testing to make sure properties of this file are not broken uses testing
+
+  4. Collections - the undo button stores a collection of moves that the player made, this is an appropriate use of a collection because the implementation uses a "stack"/LIFO structure
+
+
+=========================
+=: Your Implementation :=
+=========================
+
+- Provide an overview of each of the classes in your code, and what their
+  function is in the overall game.
+  
+  Classes in this game include:
+  
+  Card: this class stores the basic implementation of a single card including its value and color and whether it's flipped or not
+  
+  Cards: this class stores the 2D array of cards that represent the board and populates the board with random cards
+  
+  Board: this class stores the implementation of the game including the mouse action listener for the cards, the reset button and the undo button
+  
+  Game: this class stores the implementation and formatting of the game itself in swing using JFrames and JPanels and organizes the buttons on the screen
+  
+  HighscoreFunction: this class stores the implementation of the highscore function that is used on the board. This class enables users to read the highscore file and write new scores to the file
+  
+  Pair: has no use in this game REMOVE
+  
+  BoardTester: tests the board to make sure it is running correctly
+
+- Were there any significant stumbling blocks while you were implementing your
+  game (related to your design, or otherwise)?
+  
+  It was at first difficult to figure out a way to re-populate the board with a random array of "card"s but then I figured out a way to randomly re-populate the board using a boolean 2D array as a helper array
+  
+  It was also difficult to figure out how to use I/O properly without getting too complicated
+  
+  
+
+
+- Evaluate your design. Is there a good separation of functionality? How well is
+  private state encapsulated? What would you refactor, if given the chance?
+  
+  I would refactor
+
+
+
+========================
+=: External Resources :=
+========================
+
+- Cite any external resources (libraries, images, tutorials, etc.) that you may
+  have used while implementing your game.
+  
+  stackoverflow
+  javadocs
+  
+  
+
+
