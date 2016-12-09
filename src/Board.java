@@ -25,7 +25,7 @@ import javax.swing.Timer;
 			
 		public enum Mode 
 		{
-		    FIRSTCARD, SECONDCARD
+		    FIRSTCARD, SECONDCARD;
 		}
 
 		// the state of the game logic
@@ -39,7 +39,7 @@ import javax.swing.Timer;
 		private int timeElapsed = 0;
 		private int flips = 0;
 		
-		//private List moves = new Pair LinkedList();
+		private LinkedList<Card> moves = new LinkedList<Card>();
 		private HighscoreFunction highscore = new HighscoreFunction();
 
 		// Game constants
@@ -98,7 +98,7 @@ import javax.swing.Timer;
 					   else //if (mode == Mode.SECONDCARD)
 					   {
 						   Card card2 = cards.getCard(cardColumn, cardRow);
-						   if (!card2.isMatched())
+						   if (!card2.isMatched() && !card2.equals(current))
 						   {
 							   card2.flip();
 							   flips++;
@@ -119,9 +119,20 @@ import javax.swing.Timer;
 								   current.matched();
 								   card2.matched();
 								   mode = Mode.FIRSTCARD;
-								   //need to make cards unable to be flipped again.
+								   moves.add(current);
+								   moves.add(card2);
+								   //moves.add(new Pair (current.getX(), current.getY()));
+								  // moves.add(new Pair (card2.getX(), card2.getY()));
+								   //need to make cards unable to be flipped again. accomplished w isMatch!
+								   if (matched == 18) 
+									{
+										playing = false;
+										status.setText("You win! It took "+ timeElapsed*35 + " seconds and "+ flips + " flips!");
+										String name = JOptionPane.showInputDialog("Name:");
+										highscore.addScore(name, flips);
+									}   
 							   }
-							   else 
+							   else // the two cards are not a match. flip them back over.
 							   { 
 								   current.flip();
 								   card2.flip();
@@ -133,7 +144,6 @@ import javax.swing.Timer;
 				   }
 				   }); 
 
-			
 			this.status = status;
 		}
 		
@@ -169,13 +179,13 @@ import javax.swing.Timer;
 			{
 				timeElapsed++;
 				// check for the game end conditions
-				if (matched == 18) 
+			/*	if (matched == 18) 
 				{
 					playing = false;
 					status.setText("You win! It took "+ timeElapsed*35 + " seconds and "+ flips + " flips!");
 					String name = JOptionPane.showInputDialog("Name:");
 					highscore.addScore(name, flips);
-				}
+				} */ //moved to where flipping is bc has more to do w/ flipping than timing
 
 				// update the display
 			//	repaint();
@@ -183,12 +193,34 @@ import javax.swing.Timer;
 		}
 		
 		//undo button
-		public void undo()
+		public void undoLastMove()
 		{
-			if (mode == Mode.SECONDCARD)
+			if (mode != Mode.FIRSTCARD)
 			{
-				
+				current.flip();
+				paintImmediately(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+				flips--;
+				mode = Mode.FIRSTCARD;
+				System.out.println ("undoing card");
 			}
+		}
+		
+		public void undoLastMatch()
+		{
+			Card card1 = moves.removeLast();
+			Card card2 = moves.removeLast();
+			matched--;
+			card1.flip();
+			card2.flip();
+			paintImmediately(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+			card2.isUnMatched();
+			card1.isUnMatched();
+			//int xval = card1.getX()/30;
+			//int yval = card1.getY()/30;
+			//(cards.getCard(xval, yval)).flip();
+			//int xval2 = card2.getX()/30;
+			//int yval2 = card2.getY()/300;
+			//(cards.getCard(xval2, yval2)).flip();	
 		}
 
 		@Override

@@ -54,15 +54,27 @@ public class Game implements Runnable {
 			control_panel.add(reset);
 			
 			//add undo button
-			final JButton undo = new JButton("Undo");
-			reset.addActionListener(new ActionListener() 
+			final JButton undo = new JButton("Undo Last Click");
+			undo.addActionListener(new ActionListener() 
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					board.undo();
+					board.undoLastMove();
 				}
 			});
 			control_panel.add(undo);
+			
+			//add undo last match button
+			final JButton undoMatch = new JButton("Undo Last Match");
+			undoMatch.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					board.undoLastMatch();
+				}
+			});
+			control_panel.add(undoMatch);
+			
 			
 			//add instructions
 			final JButton inst = new JButton("Instructions");

@@ -134,6 +134,8 @@ public class Card {
 		{
 			g.setColor(Color.BLACK);
 			g.fillRect(xpos, ypos, width, height);
+			g.setColor(Color.WHITE);
+			g.drawRect(xpos, ypos, width, height);
 			//System.out.println ("painted a face down card");
 		}
 		else
@@ -147,6 +149,31 @@ public class Card {
 	public String toString ()
 	{
 		return ("value is " + val);
+	}
+	
+	public int getX()
+	{
+		return xpos;
+	}
+	
+	public int getY()
+	{
+		return ypos;
+	}
+	
+	public boolean isFlipped()
+	{
+		return flipped;
+	}
+	
+	public boolean equals(Card card)
+	{
+		return ((xpos == card.getX()) && (ypos == card.getY()));
+	}
+	
+	public void isUnMatched()
+	{
+		matched = false;
 	}
 
 }

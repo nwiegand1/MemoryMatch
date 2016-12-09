@@ -9,5 +9,15 @@ public class Pair {
 		this.one = one;
 		this.two = two;
 	}
+	
+	public int getX()
+	{
+		return one;
+	}
+	
+	public int getY()
+	{
+		return two;
+	}
 
 }
