@@ -169,6 +169,11 @@ import javax.swing.Timer;
 		{
 			highscore.displayScores();
 		}
+		
+		public void showHighscore()
+		{
+			highscore.displayAndGetHighestScore();
+		}
 
 		/**
 		 * This method is called every time the timer defined in the constructor
@@ -222,6 +227,16 @@ import javax.swing.Timer;
 			//int yval2 = card2.getY()/300;
 			//(cards.getCard(xval2, yval2)).flip();	
 		}
+		
+	/*	public void anothaMatch()
+		{
+			matched++;
+		}
+		
+		public int getNumMatches()
+		{
+			return matched;
+		} */
 
 		@Override
 		public void repaint ()
@@ -271,8 +286,6 @@ import javax.swing.Timer;
 	        System.err.println("ERROR reading scores from file");
 	    }
 		}
-		
-		
 		*/
 		
 		@Override

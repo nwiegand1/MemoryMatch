@@ -7,12 +7,18 @@ import org.junit.Test;
 public class BoardTester 
 {
 /*	@Test
-	public void testNumberOfFlips()
+	public void testNumberOfMatches()
 	{
 		Board board = new Board(new JLabel("Running..."));
-		board.
+		//board.anothaMatch();
+		//board.anothaMatch();
+		board.anothaMatch();
+		board.undoLastMatch();
+		System.out.println (board.getNumMatches());
 		
-	}*/
+		assertEquals (board.getNumMatches(), 0);
+		
+	} */
 	
 	@Test
 	public void testCardFlip()
@@ -35,5 +41,13 @@ public class BoardTester
 		Card card2 = new Card (4, false, 5, 7);
 		assertFalse (card1.isMatch(card2));
 	}
+	@Test
+	public void testUndo()
+	{
+	//	Board board = new Board(new JLabel("Running..."));
+		
+		//board.undoLastMatch();
+	}
+	
 
 }

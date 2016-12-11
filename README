@@ -17,7 +17,7 @@ PennKey: 55647612
 
   3. Testing - testing to make sure properties of this file are not broken uses testing
 
-  4. Collections - the undo button stores a collection of moves that the player made, this is an appropriate use of a collection because the implementation uses a "stack"/LIFO structure
+  4. Collections - the undo button stores a collection of matches that the player made, this is an appropriate use of a collection because the implementation uses a "stack"/LIFO structure
 
 
 =========================

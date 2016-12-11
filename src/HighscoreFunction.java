@@ -63,7 +63,8 @@ public class HighscoreFunction //throws IOException
 	
 	public String readHighscore()
 	{
-		int highScore = 0;
+		int lowestHighScore = 0;
+		int numHighScores;
 		String toReturn = "";
 		try {
 	        BufferedReader reader = new BufferedReader(new FileReader("textFileOfHighscores"));
@@ -122,6 +123,48 @@ public class HighscoreFunction //throws IOException
 	    */
 	}
 	
+	public int getScore (String line)
+	{
+		System.out.println (line);
+		char[] arr = line.toCharArray();
+		String name = "";
+		String score = "";
+		String[] arrOfNameAndScores = line.split(" ");
+		score = arrOfNameAndScores[1];
+		return Integer.parseInt(score);
+	}
+	
+	public void displayAndGetHighestScore()
+	{
+		int highScore = 0;
+		String toReturn = "";
+		try {
+	        BufferedReader reader = new BufferedReader(new FileReader("textFileOfHighscores"));
+	        String line = reader.readLine();
+	        while (line != null)                 // read the score file line by line
+	        {
+	            try {
+	            	if (getScore(line) > highScore)
+	            	{
+	            		toReturn = getNameAndScore(line);
+	            		highScore = getScore(line);
+	            	}
+	            } catch (NumberFormatException e1) {
+	                // ignore invalid scores
+	                //System.err.println("ignoring invalid score: " + line);
+	            }
+	            line = reader.readLine();
+	        }
+	        reader.close();
+
+	    } catch (IOException ex) {
+	        System.err.println("ERROR reading scores from file");
+	    }
+		
+		JOptionPane.showMessageDialog(null, toReturn);
+	}
+	
+	
 	
 	public String getNameAndScore (String line)
 	{
@@ -129,7 +172,7 @@ public class HighscoreFunction //throws IOException
 		char[] arr = line.toCharArray();
 		String name = "";
 		String score = "";
-		int i = 0;
+	    //int i = 0;
 		/*while (Character.isLetter(arr[i]))
 		{
 			name = name + arr[i];

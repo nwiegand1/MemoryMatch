@@ -1,4 +1,7 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,7 +35,7 @@ public class Game implements Runnable {
 			final Board board = new Board(status);
 			frame.add(board, BorderLayout.CENTER);
 			System.out.println("made board");
-
+			
 			// Reset button
 			final JPanel control_panel = new JPanel();
 			frame.add(control_panel, BorderLayout.NORTH);
@@ -87,8 +90,8 @@ public class Game implements Runnable {
 			});
 			control_panel.add(inst);
 			
-			//add highscores
-			final JButton scores = new JButton("Highscores");
+			//add scores button
+			final JButton scores = new JButton("All Scores");
 			scores.addActionListener(new ActionListener() 
 			{
 				public void actionPerformed(ActionEvent e) 
@@ -97,6 +100,18 @@ public class Game implements Runnable {
 				}
 			});
 			control_panel.add(scores);
+			
+			
+			//add highscores button
+			final JButton hiscore = new JButton("Highscore");
+			hiscore.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					board.showHighscore();
+				}
+			});
+			control_panel.add(hiscore);
 			
 
 			// Put the frame on the screen
@@ -108,6 +123,13 @@ public class Game implements Runnable {
 			board.reset();
 			
 			
+	}
+	
+	public static void centreWindow(Window frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
 	}
 
 	public static void main(String[] args) 
